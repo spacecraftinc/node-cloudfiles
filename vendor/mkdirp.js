@@ -1,5 +1,6 @@
 var path = require('path');
 var fs = require('fs');
+var existsSync = require('fs').existsSync || require('path').existsSync;
 
 exports.mkdirp = exports.mkdirP = function mkdirP (p, mode, f) {
     var cb = f || function () {};
@@ -22,7 +23,7 @@ exports.mkdirpSync = exports.mkdirPSync = function mkdirPSync (p, mode) {
   if (p.charAt(0) != '/') { throw new Error('Relative path: ' + p); return; }
   
   var ps = path.normalize(p).split('/'),
-      exists = path.existsSync(p);
+      exists = existsSync(p);
   
   function tryMkdirSync () {
       try { fs.mkdirSync(p, mode); }
